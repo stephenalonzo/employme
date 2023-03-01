@@ -40,41 +40,51 @@ class JobController extends Controller
         $userInput = $request->validate([
             'job'           => 'required|min:3',
             'location'      => 'required',
+            'job_type'      => 'required',
             'benefits'      => 'required',
             'salary'        => 'required',
+            'emp_type'       => 'required',
             'company'       => 'required',
             'website'       => 'required',
             'description'   => 'required'
         ]);
-
-        switch ($userInput['salary'])
-        {
-
-            case '1':
-                $userInput['salary'] = '$25K-$45K';
-            break;
-            
-            case '2':
-                $userInput['salary'] = '$50K-$75K';
-            break;
-
-            case '3':
-                $userInput['salary'] = '$80K-$105K';
-            break;
-
-            case '4':
-                $userInput['salary'] = '$110K-$125K';
-            break;
-
-            default:
-            break;
-
-        }
 
         Job::create($userInput);
 
         return redirect('/')->with('message', 'Job posted successfully!');
 
     }
-    
+
+    // Edit job
+    public function edit(Job $job)
+    {
+
+        return view('jobs.edit', ['job' => $job]);
+
+    }
+
+    // Store edited job
+    public function update(Request $request)
+    {
+
+        // dd($request);
+
+        $userInput = $request->validate([
+            'job'           => 'required|min:3',
+            'location'      => 'required',
+            'job_type'      => 'required',
+            'benefits'      => 'required',
+            'salary'        => 'required',
+            'emp_type'       => 'required',
+            'company'       => 'required',
+            'website'       => 'required',
+            'description'   => 'required'
+        ]);
+
+        Job::create($userInput);
+
+        return redirect('/')->with('message', 'Job edited successfully!');
+
+    }
+
 }

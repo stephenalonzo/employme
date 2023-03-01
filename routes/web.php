@@ -26,11 +26,17 @@ use Illuminate\Support\Facades\Route;
 // Show all jobs
 Route::get('/', [JobController::class, 'index']);
 
-// Create a job form
+// Show post job form
 Route::get('/jobs/create', [JobController::class, 'create']);
 
-// Store a job form
+// Store job data
 Route::post('/jobs', [JobController::class, 'store']);
+
+// Show edit job form
+Route::get('/jobs/{job}/edit', [JobController::class, 'edit']);
+
+// Store edit job from data
+Route::put('/jobs', [JobController::class, 'update']);
 
 // Show single job
 Route::get('/jobs/{job}', [JobController::class, 'show']);

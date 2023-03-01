@@ -17,10 +17,12 @@ class JobFactory extends Factory
     public function definition()
     {
         return [
-            'job'         => $this->faker->sentence(),
+            'job'           => $this->faker->sentence(),
             'location'      => $this->faker->city(),
-            'benefits'          => '401K, Dental, Medical',
-            'salary'       => $this->faker->numberBetween(0, 225999),
+            'job_type'          => $this->faker->sentence(),    
+            'benefits'      => '401K, Dental, Medical',
+            'salary'        => $this->faker->numberBetween(0, 225999),
+            'emp_type'      => $this->faker->numberBetween(0, 225999),
             'company'       => $this->faker->company(),
             'website'       => $this->faker->url(),
             'description'   => $this->faker->paragraph(5)
