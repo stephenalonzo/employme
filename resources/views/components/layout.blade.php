@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employme | Job Search</title>
     <link rel="stylesheet" href="{{asset('dist/output.css')}}">
+    <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 
 <body>

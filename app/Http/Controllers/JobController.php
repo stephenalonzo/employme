@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class JobController extends Controller
 {
@@ -44,7 +45,7 @@ class JobController extends Controller
             'benefits'      => 'required',
             'salary'        => 'required',
             'emp_type'       => 'required',
-            'company'       => 'required',
+            'company'       => ['required', Rule::unique('jobs', 'company')],
             'website'       => 'required',
             'description'   => 'required'
         ]);
@@ -64,7 +65,7 @@ class JobController extends Controller
     }
 
     // Store edited job
-    public function update(Request $request)
+    public function update(Request $request, Job $job)
     {
 
         // dd($request);
@@ -81,7 +82,7 @@ class JobController extends Controller
             'description'   => 'required'
         ]);
 
-        Job::create($userInput);
+        $job->update($userInput);
 
         return redirect('/')->with('message', 'Job edited successfully!');
 

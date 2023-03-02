@@ -36,7 +36,7 @@ Route::post('/jobs', [JobController::class, 'store']);
 Route::get('/jobs/{job}/edit', [JobController::class, 'edit']);
 
 // Store edit job from data
-Route::put('/jobs', [JobController::class, 'update']);
+Route::put('/jobs/{job}', [JobController::class, 'update']);
 
 // Show single job
 Route::get('/jobs/{job}', [JobController::class, 'show']);
