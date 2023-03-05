@@ -11,6 +11,7 @@ class Job extends Model
 
     protected $fillable = [
         'job',
+        'user_id',
         'location',
         'job_type',
         'benefits',
@@ -31,4 +32,12 @@ class Job extends Model
         }
         
     }
+
+    public function user()
+    {
+
+        return $this->belongsTo(User::class, 'user_id');
+
+    }
+
 }

@@ -23,9 +23,31 @@
                     </ul>
                 </div>
                 <div class="flex flex-row items-center space-x-4">
+                    @auth
+                    <ul class="flex flex-row items-center justify-start space-x-4">
+                        <li>
+                            <span class="font-semibold text-sm space-x-2">
+                                Welcome, {{ auth()->user()->name }}!
+                            </span>
+                        </li>
+                        <li>
+                            <a href="/logout" class="text-sm space-x-2">
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                    <span>&VerticalLine;</span>
+                    <ul class="flex flex-row items-center justify-start space-x-4">
+                        <li>
+                            <a href="/jobs/create" class="text-sm space-x-2">
+                                Post a Job
+                            </a>
+                        </li>
+                    </ul>
+                    @else
                     <ul class="flex flex-row items-center justify-start">
                         <li>
-                            <a href="./signin.html" class="text-sm space-x-2">
+                            <a href="/login" class="text-sm space-x-2">
                                 Sign In
                             </a>
                         </li>
@@ -38,11 +60,12 @@
                             </a>
                         </li>
                     </ul>
+                    @endauth
                 </div>
             </nav>
         </header>
         <section class="px-4 py-6">
-            <div class="container mx-auto w-2/3">
+            <div {{$attributes->merge(['class'  => 'container mx-auto'])}}>
                 {{$slot}}
             </div>
         </section>

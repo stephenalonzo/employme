@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use Illuminate\Pagination;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -12,7 +13,7 @@ class JobController extends Controller
     public function index()
     {
 
-        return view('jobs.index', ['jobs' => Job::latest()->filter(request(['search']))->paginate(6)]);
+        return view('jobs.index', ['jobs' => Job::latest()->filter(request(['search']))->simplePaginate(3)]);
     
     }
 
@@ -50,6 +51,8 @@ class JobController extends Controller
             'description'   => 'required'
         ]);
 
+        $userInput['user_id'] = auth()->id();
+
         Job::create($userInput);
 
         return redirect('/')->with('message', 'Job posted successfully!');
@@ -68,7 +71,13 @@ class JobController extends Controller
     public function update(Request $request, Job $job)
     {
 
-        // dd($request);
+        // Make sure logged in user is owner
+        if($job->user_id != auth()->id())
+        {
+
+            abort(403, 'Unauthorized Action');
+
+        }
 
         $userInput = $request->validate([
             'job'           => 'required|min:3',
@@ -85,6 +94,24 @@ class JobController extends Controller
         $job->update($userInput);
 
         return redirect('/')->with('message', 'Job edited successfully!');
+
+    }
+
+    // Delete job post
+    public function destroy (Job $job)
+    {
+
+        // Make sure logged in user is owner
+        if($job->user_id != auth()->id())
+        {
+
+            abort(403, 'Unauthorized Action');
+
+        }
+
+        $job->delete();
+
+        return redirect('/')->with('message', 'Job deleted successfully!');
 
     }
 
