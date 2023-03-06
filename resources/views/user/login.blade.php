@@ -1,4 +1,4 @@
-<x-layout class="w-1/3">
+<x-layout class="sm:max-w-screen-xs">
     <div class="flex flex-col items-start space-y-4">
         <form action="/user/login" method="POST" class="w-full">
             @csrf

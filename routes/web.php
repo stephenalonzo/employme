@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\UserController;
 use App\Models\Applicant;
 use Illuminate\Support\Facades\Route;
+use App\Mail\SignUp;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +54,7 @@ Route::put('/jobs/{job}', [JobController::class, 'update']);
 Route::delete('/jobs/{job}', [JobController::class, 'destroy']);
 
 // Show single job
-Route::get('/jobs/{job}', [JobController::class, 'show']);
+Route::get('/jobs/{job}', [JobController::class, 'show'])->middleware('auth');
 
 // Show register form
 Route::get('/register', [UserController::class, 'create']);

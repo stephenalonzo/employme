@@ -37,7 +37,7 @@ class ApplicantController extends Controller
 
         Applicant::create($userInput);
 
-        return redirect('/')->with('message', 'Test!');
+        return redirect('/')->with('message', 'Thanks for applying!');
 
     }
 
@@ -49,22 +49,24 @@ class ApplicantController extends Controller
 
     }
 
+    // Hire applicant
     public function update(Applicant $applicant)
     {
 
         $userInput['applicant_status'] = 1;
         $applicant->update($userInput);
         
-        return redirect('/')->with('message', 'Test!');
+        return redirect('/')->with('message', 'Applicant hired! We hope that you found your next rock star.');
 
     }
 
+    // Dismiss applicant
     public function destroy(Applicant $applicant)
     {
 
         $applicant->delete();
         
-        return redirect('/')->with('message', 'Delted!');
+        return redirect('/')->with('message', 'Applicant dismissed! We are sorry to hear that this candidate was not your next rock star.');
 
     }
 

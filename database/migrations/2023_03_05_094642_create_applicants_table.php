@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('applicants', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('job_id')->references('id')->on('jobs');
+            $table->foreignId('job_id')->references('id')->on('jobs')->constrained()->onDelete('cascade');
             $table->string('applicant');
             $table->string('email');
             $table->longText('resume');

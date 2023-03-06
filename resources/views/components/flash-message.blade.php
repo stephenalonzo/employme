@@ -1,5 +1,5 @@
 @if (session()->has('message'))
-    <div x-data="{ open: true }" x-show="open" role="alert" class="fixed top-0 left-1/2 transform -translate-x-1/2 rounded-xl border border-gray-100 bg-white p-4 shadow-xl">
+    <div x-data="{ open: true }" x-init="setTimeout(() => open = false, 3000)" x-show="open" role="alert" class="fixed top-0 left-1/2 transform -translate-x-1/2 rounded-xl border border-gray-100 bg-white p-4 shadow-xl">
         <div class="flex items-start gap-4">
             <span class="text-green-600">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -11,10 +11,6 @@
 
             <div class="flex-1">
                 <strong class="block font-medium text-gray-900"> {{ session('message') }} </strong>
-
-                <p class="mt-1 text-sm text-gray-700">
-                    We're excited to see you discover the best fit for your open job position!
-                </p>
             </div>
 
             <button @click="open = ! open" class="text-gray-500 transition hover:text-gray-600">

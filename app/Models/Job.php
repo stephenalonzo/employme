@@ -25,10 +25,15 @@ class Job extends Model
     public function scopeFilter($query, array $filters)
     {
 
-        if ($filters['search'] ?? false)
+        if ($filters['position'] ?? false)
         {
-            $query->where('job', 'like', '%' . request('search') . '%')
-                ->orWhere('description', 'like', '%' . request('search') . '%');
+            $query->where('job', 'like', '%' . request('position') . '%')
+                    ->where('location', 'like', '%' . request('location') . '%');
+        }
+
+        if ($filters['location'] ?? false)
+        {
+            $query->where('location', 'like', '%' . request('location') . '%');
         }
         
     }

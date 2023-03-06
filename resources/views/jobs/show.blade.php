@@ -1,22 +1,22 @@
 <x-layout>
+    @include('partials.search')
     <div class="flex flex-row items-start">
-        <div class="p-4 w-full">
+        <div class="py-6 w-full">
             <div class="space-y-3">
-                <div class="flex flex-row items-center justify-between">
+                <div class="flex flex-col items-center justify-between space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
                     <h1 class="text-lg font-semibold">{{ $job->job }}</h1>
                     <div class="flex flex-row items-center space-x-3">
-                        <a href="/jobs/{{$job->id}}/apply" class="px-4 py-2 rounded-md bg-purple-700 text-sm text-white">Apply</a>
                         @auth
-                        @if (auth()->id() != $job->user_id)
-
-                        @else
-                        <a href="/jobs/{{ $job->id }}/edit" class="px-4 py-2 rounded-md border border-purple-700 text-purple-700 text-sm">Edit</a>
+                        @if (auth()->id() == $job->user_id)
+                        <a href="/jobs/{{ $job->id }}/edit" class="px-4 py-2 rounded-md border bg-purple-700 text-sm text-white hover:border hover:border-purple-700 hover:text-purple-700 hover:bg-transparent duration-200">Edit</a>
                         <form method="POST" action="/jobs/{{ $job->id }}">
                             @csrf
                             @method('DELETE')
-                            <button class="px-4 py-2 rounded-md bg-red-700 text-white text-sm">Delete</button>
+                            <button class="px-4 py-2 rounded-md border bg-red-700 text-white text-sm hover:border-red-700 hover:text-red-700 hover:bg-transparent duration-200">Delete</button>
                         </form>
-                        <a href="/jobs/{{ $job->id }}/applicants" class="px-4 py-2 rounded-md border border-purple-700 text-purple-700 text-sm">View Applicants</a>
+                        <a href="/jobs/{{ $job->id }}/applicants" class="px-4 py-2 rounded-md border border-purple-700 text-purple-700 text-sm hover:bg-purple-700 hover:text-white duration-200">View Applicants</a>
+                        @elseif (auth()->user()->purpose == 1)
+                        <a href="/jobs/{{$job->id}}/apply" class="px-4 py-2 border rounded-md bg-purple-700 text-sm text-white hover:border-purple-700 hover:text-purple-700 hover:bg-transparent duration-200">Apply</a>
                         @endif
                         @endauth
                     </div>

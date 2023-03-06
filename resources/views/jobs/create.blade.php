@@ -1,7 +1,7 @@
 <x-layout>
     <form action="/jobs" method="POST" class="w-full">
         @csrf
-        <div class="grid grid-cols-2 gap-4 items-start">
+        <div class="grid grid-flow-row-dense gap-4 items-end">
             <div class="flex flex-col items-start space-y-2 w-full">
                 <label for="job" class="font-semibold">Job Title</label>
                 <input type="text" id="job" class="px-4 py-2 rounded-md border border-gray-200 w-full"

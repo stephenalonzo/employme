@@ -13,15 +13,8 @@
 <body>
     <main>
         <header class="p-4 border-b border-gray-200">
-            <nav class="flex flex-row items-center justify-between w-full">
-                <div class="flex flex-row items-center space-x-6">
-                    <a href="/" class="font-semibold text-xl">Employme</a>
-                    <ul class="flex flex-row items-center justify-start space-x-4">
-                        <li>
-                            <a href="/" class="text-sm">Home</a>
-                        </li>
-                    </ul>
-                </div>
+            <nav class="flex flex-col items-center justify-between w-full space-y-4 sm:flex-row sm:space-y-0">
+                <a href="/" class="font-semibold text-xl">Employme</a>
                 <div class="flex flex-row items-center space-x-4">
                     @auth
                     <ul class="flex flex-row items-center justify-start space-x-4">
@@ -36,6 +29,7 @@
                             </a>
                         </li>
                     </ul>
+                    @if (auth()->user()->purpose == 2)
                     <span>&VerticalLine;</span>
                     <ul class="flex flex-row items-center justify-start space-x-4">
                         <li>
@@ -44,6 +38,7 @@
                             </a>
                         </li>
                     </ul>
+                    @endif
                     @else
                     <ul class="flex flex-row items-center justify-start">
                         <li>
